@@ -41,6 +41,7 @@ import { AddTextToSpeechToChatFlow1754986468397 } from './1754986468397-AddTextT
 import { ModifyChatflowType1755066758601 } from './1755066758601-ModifyChatflowType'
 import { AddTextToSpeechToChatFlow1759419216034 } from './1759419216034-AddTextToSpeechToChatFlow'
 import { AddChatFlowNameIndex1759424828558 } from './1759424828558-AddChatFlowNameIndex'
+import { AddAgentFlowOSMarketplaceTables20251104100959 } from './20251104100959-AddAgentFlowOSMarketplaceTables'
 
 import { AddAuthTables1720230151482 } from '../../../enterprise/database/migrations/mysql/1720230151482-AddAuthTables'
 import { AddWorkspace1720230151484 } from '../../../enterprise/database/migrations/mysql/1720230151484-AddWorkspace'
@@ -108,5 +109,6 @@ export const mysqlMigrations = [
     AddTextToSpeechToChatFlow1754986468397,
     ModifyChatflowType1755066758601,
     AddTextToSpeechToChatFlow1759419216034,
-    AddChatFlowNameIndex1759424828558
+    AddChatFlowNameIndex1759424828558,
+    AddAgentFlowOSMarketplaceTables20251104100959
 ]

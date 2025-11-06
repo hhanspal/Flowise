@@ -1,0 +1,325 @@
+{
+    "description": "DevOps automation workflow for CI/CD pipelines, infrastructure monitoring, and deployment management",
+    "usecases": ["DevOps", "CI/CD", "Infrastructure", "IT Operations", "AI Agent"],
+    "framework": ["AgentFlowOS"],
+    "badge": "DevOps Automation",
+    "nodes": [
+        {
+            "width": 300,
+            "height": 514,
+            "id": "smartPlanner_0",
+            "position": {
+                "x": 400,
+                "y": 100
+            },
+            "type": "customNode",
+            "data": {
+                "id": "smartPlanner_0",
+                "label": "Smart Planner",
+                "version": 1,
+                "name": "smartPlanner",
+                "type": "SmartPlanner",
+                "baseClasses": ["SmartPlanner"],
+                "category": "Agents",
+                "description": "Autonomous goal decomposition and planning agent using AgentFlowOS planning engine",
+                "inputParams": [
+                    {
+                        "label": "Goal",
+                        "name": "goal",
+                        "type": "string",
+                        "description": "The high-level goal to decompose into actionable tasks"
+                    },
+                    {
+                        "label": "Chat Model",
+                        "name": "model",
+                        "type": "BaseChatModel",
+                        "description": "LLM model to use for planning"
+                    },
+                    {
+                        "label": "Available Capabilities",
+                        "name": "capabilities",
+                        "type": "string",
+                        "description": "Comma-separated list of available capabilities",
+                        "optional": true
+                    }
+                ],
+                "inputAnchors": [
+                    {
+                        "id": "smartPlanner_0-input-goal-string",
+                        "name": "goal",
+                        "label": "Goal",
+                        "type": "string"
+                    },
+                    {
+                        "id": "smartPlanner_0-input-model-BaseChatModel",
+                        "name": "model",
+                        "label": "Chat Model",
+                        "type": "BaseChatModel"
+                    },
+                    {
+                        "id": "smartPlanner_0-input-capabilities-string",
+                        "name": "capabilities",
+                        "label": "Available Capabilities",
+                        "type": "string"
+                    }
+                ],
+                "inputs": {
+                    "goal": "Deploy new microservice to production with zero downtime",
+                    "capabilities": "docker,kubernetes,jenkins,terraform,monitoring,prometheus,grafana"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "smartPlanner_0-output-smartPlanner-SmartPlanner",
+                        "name": "output",
+                        "label": "Output",
+                        "type": "SmartPlanner"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 400,
+                "y": 100
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 300,
+            "height": 143,
+            "id": "chatOpenAI_0",
+            "position": {
+                "x": 50,
+                "y": 100
+            },
+            "type": "customNode",
+            "data": {
+                "id": "chatOpenAI_0",
+                "label": "ChatOpenAI",
+                "version": 1,
+                "name": "chatOpenAI",
+                "type": "ChatOpenAI",
+                "baseClasses": ["ChatOpenAI", "BaseChatModel", "BaseLanguageModel"],
+                "category": "Chat Models",
+                "description": "OpenAI Chat Model for conversational AI",
+                "inputParams": [
+                    {
+                        "label": "Connect Credential",
+                        "name": "credential",
+                        "type": "credential",
+                        "credentialNames": ["openAIApi"]
+                    },
+                    {
+                        "label": "Model Name",
+                        "name": "modelName",
+                        "type": "options",
+                        "options": [
+                            {"label": "gpt-3.5-turbo", "name": "gpt-3.5-turbo"},
+                            {"label": "gpt-4", "name": "gpt-4"},
+                            {"label": "gpt-4-turbo-preview", "name": "gpt-4-turbo-preview"}
+                        ],
+                        "default": "gpt-3.5-turbo"
+                    }
+                ],
+                "inputAnchors": [],
+                "inputs": {
+                    "modelName": "gpt-4"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "chatOpenAI_0-output-chatOpenAI-ChatOpenAI|BaseChatModel|BaseLanguageModel",
+                        "name": "chatOpenAI",
+                        "label": "ChatOpenAI",
+                        "type": "ChatOpenAI | BaseChatModel | BaseLanguageModel"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 50,
+                "y": 100
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 300,
+            "height": 143,
+            "id": "mcpTool_0",
+            "position": {
+                "x": 750,
+                "y": 100
+            },
+            "type": "customNode",
+            "data": {
+                "id": "mcpTool_0",
+                "label": "MCP Tool",
+                "version": 1,
+                "name": "mcpTool",
+                "type": "MCPTool",
+                "baseClasses": ["MCPTool", "Tool"],
+                "category": "Tools",
+                "description": "Cross-platform tool integration using Model Context Protocol",
+                "inputParams": [
+                    {
+                        "label": "Tool Name",
+                        "name": "toolName",
+                        "type": "string",
+                        "description": "Name of the MCP tool to use"
+                    },
+                    {
+                        "label": "Tool Parameters",
+                        "name": "parameters",
+                        "type": "json",
+                        "description": "Parameters for the MCP tool",
+                        "optional": true
+                    }
+                ],
+                "inputAnchors": [
+                    {
+                        "id": "mcpTool_0-input-toolName-string",
+                        "name": "toolName",
+                        "label": "Tool Name",
+                        "type": "string"
+                    },
+                    {
+                        "id": "mcpTool_0-input-parameters-json",
+                        "name": "parameters",
+                        "label": "Tool Parameters",
+                        "type": "json"
+                    }
+                ],
+                "inputs": {
+                    "toolName": "docker",
+                    "parameters": "{\"command\": \"build\", \"tag\": \"myapp:latest\"}"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "mcpTool_0-output-mcpTool-MCPTool|Tool",
+                        "name": "mcpTool",
+                        "label": "MCP Tool",
+                        "type": "MCPTool | Tool"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 750,
+                "y": 100
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 300,
+            "height": 143,
+            "id": "agentFlowMemory_0",
+            "position": {
+                "x": 400,
+                "y": 400
+            },
+            "type": "customNode",
+            "data": {
+                "id": "agentFlowMemory_0",
+                "label": "AgentFlow Memory",
+                "version": 1,
+                "name": "agentFlowMemory",
+                "type": "AgentFlowMemory",
+                "baseClasses": ["AgentFlowMemory", "BaseChatMemory", "BaseMemory"],
+                "category": "Memory",
+                "description": "Advanced memory system for AgentFlowOS with context awareness and long-term retention",
+                "inputParams": [
+                    {
+                        "label": "Session ID",
+                        "name": "sessionId",
+                        "type": "string",
+                        "description": "Unique identifier for the conversation session"
+                    },
+                    {
+                        "label": "Memory Type",
+                        "name": "memoryType",
+                        "type": "options",
+                        "options": [
+                            {"label": "Buffer", "name": "buffer"},
+                            {"label": "Summary", "name": "summary"},
+                            {"label": "Vector", "name": "vector"}
+                        ],
+                        "default": "buffer"
+                    }
+                ],
+                "inputAnchors": [
+                    {
+                        "id": "agentFlowMemory_0-input-sessionId-string",
+                        "name": "sessionId",
+                        "label": "Session ID",
+                        "type": "string"
+                    },
+                    {
+                        "id": "agentFlowMemory_0-input-memoryType-options",
+                        "name": "memoryType",
+                        "label": "Memory Type",
+                        "type": "options"
+                    }
+                ],
+                "inputs": {
+                    "sessionId": "devops-deployment-001",
+                    "memoryType": "buffer"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "agentFlowMemory_0-output-agentFlowMemory-AgentFlowMemory|BaseChatMemory|BaseMemory",
+                        "name": "agentFlowMemory",
+                        "label": "AgentFlow Memory",
+                        "type": "AgentFlowMemory | BaseChatMemory | BaseMemory"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 400,
+                "y": 400
+            },
+            "selected": false,
+            "dragging": false
+        }
+    ],
+    "edges": [
+        {
+            "source": "chatOpenAI_0",
+            "sourceHandle": "chatOpenAI_0-output-chatOpenAI-ChatOpenAI|BaseChatModel|BaseLanguageModel",
+            "target": "smartPlanner_0",
+            "targetHandle": "smartPlanner_0-input-model-BaseChatModel",
+            "type": "buttonedge",
+            "id": "chatOpenAI_0-smartPlanner_0-connection",
+            "data": {
+                "label": ""
+            }
+        },
+        {
+            "source": "smartPlanner_0",
+            "sourceHandle": "smartPlanner_0-output-smartPlanner-SmartPlanner",
+            "target": "mcpTool_0",
+            "targetHandle": "mcpTool_0-input-mcpTool-MCPTool|Tool",
+            "type": "buttonedge",
+            "id": "smartPlanner_0-mcpTool_0-connection",
+            "data": {
+                "label": ""
+            }
+        },
+        {
+            "source": "mcpTool_0",
+            "sourceHandle": "mcpTool_0-output-mcpTool-MCPTool|Tool",
+            "target": "agentFlowMemory_0",
+            "targetHandle": "agentFlowMemory_0-input-agentFlowMemory-AgentFlowMemory|BaseChatMemory|BaseMemory",
+            "type": "buttonedge",
+            "id": "mcpTool_0-agentFlowMemory_0-connection",
+            "data": {
+                "label": ""
+            }
+        }
+    ]
+}

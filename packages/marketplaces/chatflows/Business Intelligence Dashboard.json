@@ -1,0 +1,269 @@
+{
+    "description": "AI-powered data analysis workflow for processing datasets, generating insights, and creating automated reports",
+    "usecases": ["Data Analysis", "Business Intelligence", "Analytics", "AI Agent"],
+    "framework": ["AgentFlowOS"],
+    "badge": "Data Analytics",
+    "nodes": [
+        {
+            "width": 300,
+            "height": 514,
+            "id": "dataAnalysisAgent_0",
+            "position": {
+                "x": 600,
+                "y": 200
+            },
+            "type": "customNode",
+            "data": {
+                "id": "dataAnalysisAgent_0",
+                "label": "Data Analysis Agent",
+                "version": 1,
+                "name": "dataAnalysisAgent",
+                "type": "DataAnalysisAgent",
+                "baseClasses": ["DataAnalysisAgent"],
+                "category": "Agents",
+                "description": "Autonomous data analysis agent for processing datasets, generating insights, and creating visualizations",
+                "inputParams": [
+                    {
+                        "label": "Data Input",
+                        "name": "dataInput",
+                        "type": "string",
+                        "description": "Raw data, dataset description, or analysis request"
+                    },
+                    {
+                        "label": "Chat Model",
+                        "name": "model",
+                        "type": "BaseChatModel",
+                        "description": "LLM model to use for data analysis and insight generation"
+                    },
+                    {
+                        "label": "Analysis Type",
+                        "name": "analysisType",
+                        "type": "string",
+                        "description": "Type of analysis needed (exploratory, statistical, predictive, etc.)",
+                        "optional": true
+                    },
+                    {
+                        "label": "Data Context",
+                        "name": "dataContext",
+                        "type": "string",
+                        "description": "Additional context about the data source, business domain, or analysis goals",
+                        "optional": true
+                    },
+                    {
+                        "label": "Output Format",
+                        "name": "outputFormat",
+                        "type": "string",
+                        "description": "Desired output format (insights, visualization, report, etc.)",
+                        "optional": true
+                    }
+                ],
+                "inputAnchors": [
+                    {
+                        "id": "dataAnalysisAgent_0-input-dataInput-string",
+                        "name": "dataInput",
+                        "label": "Data Input",
+                        "type": "string"
+                    },
+                    {
+                        "id": "dataAnalysisAgent_0-input-model-BaseChatModel",
+                        "name": "model",
+                        "label": "Chat Model",
+                        "type": "BaseChatModel"
+                    },
+                    {
+                        "id": "dataAnalysisAgent_0-input-analysisType-string",
+                        "name": "analysisType",
+                        "label": "Analysis Type",
+                        "type": "string"
+                    },
+                    {
+                        "id": "dataAnalysisAgent_0-input-dataContext-string",
+                        "name": "dataContext",
+                        "label": "Data Context",
+                        "type": "string"
+                    },
+                    {
+                        "id": "dataAnalysisAgent_0-input-outputFormat-string",
+                        "name": "outputFormat",
+                        "label": "Output Format",
+                        "type": "string"
+                    }
+                ],
+                "inputs": {
+                    "dataInput": "Sales data: Q1 revenue $2.3M (15% growth), Q2 $2.8M (22% growth), Q3 $3.1M (11% growth), Q4 $2.9M (-6% decline). Customer acquisition: 450 new customers, churn rate 8%.",
+                    "analysisType": "exploratory",
+                    "dataContext": "SaaS company, annual recurring revenue focus, seasonal patterns expected",
+                    "outputFormat": "insights"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "dataAnalysisAgent_0-output-dataAnalysisAgent-DataAnalysisAgent",
+                        "name": "output",
+                        "label": "Output",
+                        "type": "DataAnalysisAgent"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 600,
+                "y": 200
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 300,
+            "height": 143,
+            "id": "chatOpenAI_0",
+            "position": {
+                "x": 200,
+                "y": 200
+            },
+            "type": "customNode",
+            "data": {
+                "id": "chatOpenAI_0",
+                "label": "ChatOpenAI",
+                "version": 1,
+                "name": "chatOpenAI",
+                "type": "ChatOpenAI",
+                "baseClasses": ["ChatOpenAI", "BaseChatModel", "BaseLanguageModel"],
+                "category": "Chat Models",
+                "description": "OpenAI Chat Model for conversational AI",
+                "inputParams": [
+                    {
+                        "label": "Connect Credential",
+                        "name": "credential",
+                        "type": "credential",
+                        "credentialNames": ["openAIApi"]
+                    },
+                    {
+                        "label": "Model Name",
+                        "name": "modelName",
+                        "type": "options",
+                        "options": [
+                            {"label": "gpt-3.5-turbo", "name": "gpt-3.5-turbo"},
+                            {"label": "gpt-4", "name": "gpt-4"},
+                            {"label": "gpt-4-turbo-preview", "name": "gpt-4-turbo-preview"}
+                        ],
+                        "default": "gpt-3.5-turbo"
+                    }
+                ],
+                "inputAnchors": [],
+                "inputs": {
+                    "modelName": "gpt-4"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "chatOpenAI_0-output-chatOpenAI-ChatOpenAI|BaseChatModel|BaseLanguageModel",
+                        "name": "chatOpenAI",
+                        "label": "ChatOpenAI",
+                        "type": "ChatOpenAI | BaseChatModel | BaseLanguageModel"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 200,
+                "y": 200
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 300,
+            "height": 143,
+            "id": "mcpTool_0",
+            "position": {
+                "x": 1000,
+                "y": 200
+            },
+            "type": "customNode",
+            "data": {
+                "id": "mcpTool_0",
+                "label": "MCP Tool",
+                "version": 1,
+                "name": "mcpTool",
+                "type": "MCPTool",
+                "baseClasses": ["MCPTool", "Tool"],
+                "category": "Tools",
+                "description": "Cross-platform tool integration using Model Context Protocol",
+                "inputParams": [
+                    {
+                        "label": "Tool Name",
+                        "name": "toolName",
+                        "type": "string",
+                        "description": "Name of the MCP tool to use"
+                    },
+                    {
+                        "label": "Tool Parameters",
+                        "name": "parameters",
+                        "type": "json",
+                        "description": "Parameters for the MCP tool",
+                        "optional": true
+                    }
+                ],
+                "inputAnchors": [
+                    {
+                        "id": "mcpTool_0-input-toolName-string",
+                        "name": "toolName",
+                        "label": "Tool Name",
+                        "type": "string"
+                    },
+                    {
+                        "id": "mcpTool_0-input-parameters-json",
+                        "name": "parameters",
+                        "label": "Tool Parameters",
+                        "type": "json"
+                    }
+                ],
+                "inputs": {
+                    "toolName": "generate_chart",
+                    "parameters": "{\"type\": \"line\", \"data\": \"revenue_trends\", \"title\": \"Q4 Revenue Decline Analysis\"}"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "mcpTool_0-output-mcpTool-MCPTool|Tool",
+                        "name": "mcpTool",
+                        "label": "MCP Tool",
+                        "type": "MCPTool | Tool"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 1000,
+                "y": 200
+            },
+            "selected": false,
+            "dragging": false
+        }
+    ],
+    "edges": [
+        {
+            "source": "chatOpenAI_0",
+            "sourceHandle": "chatOpenAI_0-output-chatOpenAI-ChatOpenAI|BaseChatModel|BaseLanguageModel",
+            "target": "dataAnalysisAgent_0",
+            "targetHandle": "dataAnalysisAgent_0-input-model-BaseChatModel",
+            "type": "buttonedge",
+            "id": "chatOpenAI_0-dataAnalysisAgent_0-connection",
+            "data": {
+                "label": ""
+            }
+        },
+        {
+            "source": "dataAnalysisAgent_0",
+            "sourceHandle": "dataAnalysisAgent_0-output-dataAnalysisAgent-DataAnalysisAgent",
+            "target": "mcpTool_0",
+            "targetHandle": "mcpTool_0-input-mcpTool-MCPTool|Tool",
+            "type": "buttonedge",
+            "id": "dataAnalysisAgent_0-mcpTool_0-connection",
+            "data": {
+                "label": ""
+            }
+        }
+    ]
+}

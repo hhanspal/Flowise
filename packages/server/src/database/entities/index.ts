@@ -17,6 +17,9 @@ import { Evaluator } from './Evaluator'
 import { ApiKey } from './ApiKey'
 import { CustomTemplate } from './CustomTemplate'
 import { Execution } from './Execution'
+import { MarketplaceSubmission } from './MarketplaceSubmission'
+import { AgentExperience } from './AgentExperience'
+import { WorkflowTemplate } from './WorkflowTemplate'
 import { LoginActivity, WorkspaceShared, WorkspaceUsers } from '../../enterprise/database/entities/EnterpriseEntities'
 import { User } from '../../enterprise/database/entities/user.entity'
 import { Organization } from '../../enterprise/database/entities/organization.entity'
@@ -51,6 +54,9 @@ export const entities = {
     WorkspaceShared,
     CustomTemplate,
     Execution,
+    MarketplaceSubmission,
+    AgentExperience,
+    WorkflowTemplate,
     Organization,
     Role,
     OrganizationUser,

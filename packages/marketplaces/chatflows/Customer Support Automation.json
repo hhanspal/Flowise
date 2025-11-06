@@ -1,0 +1,189 @@
+{
+    "description": "Automated customer support workflow using AI agents to handle inquiries, provide responses, and escalate when needed",
+    "usecases": ["Customer Service", "Support Automation", "AI Agent"],
+    "framework": ["AgentFlowOS"],
+    "badge": "Customer Support",
+    "nodes": [
+        {
+            "width": 300,
+            "height": 514,
+            "id": "customerSupportAgent_0",
+            "position": {
+                "x": 600,
+                "y": 200
+            },
+            "type": "customNode",
+            "data": {
+                "id": "customerSupportAgent_0",
+                "label": "Customer Support Agent",
+                "version": 1,
+                "name": "customerSupportAgent",
+                "type": "CustomerSupportAgent",
+                "baseClasses": ["CustomerSupportAgent"],
+                "category": "Agents",
+                "description": "Autonomous customer support agent for handling inquiries, complaints, and support tickets",
+                "inputParams": [
+                    {
+                        "label": "Customer Inquiry",
+                        "name": "inquiry",
+                        "type": "string",
+                        "description": "The customer inquiry, complaint, or support request"
+                    },
+                    {
+                        "label": "Chat Model",
+                        "name": "model",
+                        "type": "BaseChatModel",
+                        "description": "LLM model to use for customer support responses"
+                    },
+                    {
+                        "label": "Customer Context",
+                        "name": "customerContext",
+                        "type": "string",
+                        "description": "Additional customer information (account history, previous interactions, etc.)",
+                        "optional": true
+                    },
+                    {
+                        "label": "Support Policies",
+                        "name": "policies",
+                        "type": "string",
+                        "description": "Company support policies and guidelines",
+                        "optional": true
+                    },
+                    {
+                        "label": "Available Actions",
+                        "name": "availableActions",
+                        "type": "string",
+                        "description": "Comma-separated list of available support actions (refund, escalate, create_ticket, etc.)",
+                        "optional": true
+                    }
+                ],
+                "inputAnchors": [
+                    {
+                        "id": "customerSupportAgent_0-input-inquiry-string",
+                        "name": "inquiry",
+                        "label": "Customer Inquiry",
+                        "type": "string"
+                    },
+                    {
+                        "id": "customerSupportAgent_0-input-model-BaseChatModel",
+                        "name": "model",
+                        "label": "Chat Model",
+                        "type": "BaseChatModel"
+                    },
+                    {
+                        "id": "customerSupportAgent_0-input-customerContext-string",
+                        "name": "customerContext",
+                        "label": "Customer Context",
+                        "type": "string"
+                    },
+                    {
+                        "id": "customerSupportAgent_0-input-policies-string",
+                        "name": "policies",
+                        "label": "Support Policies",
+                        "type": "string"
+                    },
+                    {
+                        "id": "customerSupportAgent_0-input-availableActions-string",
+                        "name": "availableActions",
+                        "label": "Available Actions",
+                        "type": "string"
+                    }
+                ],
+                "inputs": {
+                    "inquiry": "Hi, I'm having trouble logging into my account. Can you help?",
+                    "customerContext": "Premium customer, account created 6 months ago, previous login issues resolved",
+                    "policies": "24/7 support, escalate after 3 attempts, refund policy within 30 days",
+                    "availableActions": "respond,escalate,create_ticket,refund"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "customerSupportAgent_0-output-customerSupportAgent-CustomerSupportAgent",
+                        "name": "output",
+                        "label": "Output",
+                        "type": "CustomerSupportAgent"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 600,
+                "y": 200
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 300,
+            "height": 143,
+            "id": "chatOpenAI_0",
+            "position": {
+                "x": 200,
+                "y": 200
+            },
+            "type": "customNode",
+            "data": {
+                "id": "chatOpenAI_0",
+                "label": "ChatOpenAI",
+                "version": 1,
+                "name": "chatOpenAI",
+                "type": "ChatOpenAI",
+                "baseClasses": ["ChatOpenAI", "BaseChatModel", "BaseLanguageModel"],
+                "category": "Chat Models",
+                "description": "OpenAI Chat Model for conversational AI",
+                "inputParams": [
+                    {
+                        "label": "Connect Credential",
+                        "name": "credential",
+                        "type": "credential",
+                        "credentialNames": ["openAIApi"]
+                    },
+                    {
+                        "label": "Model Name",
+                        "name": "modelName",
+                        "type": "options",
+                        "options": [
+                            {"label": "gpt-3.5-turbo", "name": "gpt-3.5-turbo"},
+                            {"label": "gpt-4", "name": "gpt-4"},
+                            {"label": "gpt-4-turbo-preview", "name": "gpt-4-turbo-preview"}
+                        ],
+                        "default": "gpt-3.5-turbo"
+                    }
+                ],
+                "inputAnchors": [],
+                "inputs": {
+                    "modelName": "gpt-4"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "chatOpenAI_0-output-chatOpenAI-ChatOpenAI|BaseChatModel|BaseLanguageModel",
+                        "name": "chatOpenAI",
+                        "label": "ChatOpenAI",
+                        "type": "ChatOpenAI | BaseChatModel | BaseLanguageModel"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 200,
+                "y": 200
+            },
+            "selected": false,
+            "dragging": false
+        }
+    ],
+    "edges": [
+        {
+            "source": "chatOpenAI_0",
+            "sourceHandle": "chatOpenAI_0-output-chatOpenAI-ChatOpenAI|BaseChatModel|BaseLanguageModel",
+            "target": "customerSupportAgent_0",
+            "targetHandle": "customerSupportAgent_0-input-model-BaseChatModel",
+            "type": "buttonedge",
+            "id": "chatOpenAI_0-customerSupportAgent_0-connection",
+            "data": {
+                "label": ""
+            }
+        }
+    ]
+}

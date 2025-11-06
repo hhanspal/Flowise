@@ -373,7 +373,22 @@ export async function start(): Promise<void> {
     serverApp = new App()
 
     const host = process.env.HOST
-    const port = parseInt(process.env.PORT || '', 10) || 3000
+    let port = parseInt(process.env.PORT || '', 10) || 3000
+    
+    // Check if running in desktop mode and use dynamic port allocation
+    if (process.env.AGENTFLOWOS_DESKTOP === 'true') {
+        try {
+            const portfinder = require('portfinder');
+            portfinder.basePort = 3000;
+            portfinder.highestPort = 3100;
+            port = await portfinder.getPortPromise();
+            console.log('[Flowise] Desktop mode: allocated port', port);
+        } catch (error) {
+            console.warn('[Flowise] Desktop mode: failed to find available port, using default 3000');
+            port = 3000;
+        }
+    }
+    
     const server = http.createServer(serverApp.app)
 
     await serverApp.initDatabase()

@@ -1,0 +1,258 @@
+{
+    "description": "AI-powered sales automation workflow for lead qualification, opportunity management, and deal tracking",
+    "usecases": ["Sales", "Lead Generation", "CRM Automation", "AI Agent"],
+    "framework": ["AgentFlowOS"],
+    "badge": "Sales Automation",
+    "nodes": [
+        {
+            "width": 300,
+            "height": 514,
+            "id": "salesAgent_0",
+            "position": {
+                "x": 600,
+                "y": 200
+            },
+            "type": "customNode",
+            "data": {
+                "id": "salesAgent_0",
+                "label": "Sales Agent",
+                "version": 1,
+                "name": "salesAgent",
+                "type": "SalesAgent",
+                "baseClasses": ["SalesAgent"],
+                "category": "Agents",
+                "description": "Autonomous sales agent for lead qualification, opportunity management, and deal closing",
+                "inputParams": [
+                    {
+                        "label": "Lead Information",
+                        "name": "leadInfo",
+                        "type": "string",
+                        "description": "Lead details including name, company, contact info, and current status"
+                    },
+                    {
+                        "label": "Chat Model",
+                        "name": "model",
+                        "type": "BaseChatModel",
+                        "description": "LLM model to use for sales conversations and analysis"
+                    },
+                    {
+                        "label": "Sales Context",
+                        "name": "salesContext",
+                        "type": "string",
+                        "description": "Additional sales context (product info, pricing, competitor analysis)",
+                        "optional": true
+                    },
+                    {
+                        "label": "Sales Goals",
+                        "name": "salesGoals",
+                        "type": "string",
+                        "description": "Sales objectives and targets for this interaction",
+                        "optional": true
+                    },
+                    {
+                        "label": "Available Actions",
+                        "name": "availableActions",
+                        "type": "string",
+                        "description": "Comma-separated list of available sales actions (schedule_demo, send_proposal, qualify_lead, etc.)",
+                        "optional": true
+                    }
+                ],
+                "inputAnchors": [
+                    {
+                        "id": "salesAgent_0-input-leadInfo-string",
+                        "name": "leadInfo",
+                        "label": "Lead Information",
+                        "type": "string"
+                    },
+                    {
+                        "id": "salesAgent_0-input-model-BaseChatModel",
+                        "name": "model",
+                        "label": "Chat Model",
+                        "type": "BaseChatModel"
+                    },
+                    {
+                        "id": "salesAgent_0-input-salesContext-string",
+                        "name": "salesContext",
+                        "label": "Sales Context",
+                        "type": "string"
+                    },
+                    {
+                        "id": "salesAgent_0-input-salesGoals-string",
+                        "name": "salesGoals",
+                        "label": "Sales Goals",
+                        "type": "string"
+                    },
+                    {
+                        "id": "salesAgent_0-input-availableActions-string",
+                        "name": "availableActions",
+                        "label": "Available Actions",
+                        "type": "string"
+                    }
+                ],
+                "inputs": {
+                    "leadInfo": "John Doe, CTO at TechCorp, interested in AI automation, budget $50K-100K, timeline 3 months",
+                    "salesContext": "Product: AgentFlowOS Studio, Price: $99/user/month, Competitors: Zapier, Make",
+                    "salesGoals": "Close 3 deals this quarter, average deal size $75K",
+                    "availableActions": "qualify_lead,schedule_demo,send_proposal,follow_up"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "salesAgent_0-output-salesAgent-SalesAgent",
+                        "name": "output",
+                        "label": "Output",
+                        "type": "SalesAgent"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 600,
+                "y": 200
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 300,
+            "height": 143,
+            "id": "chatOpenAI_0",
+            "position": {
+                "x": 200,
+                "y": 200
+            },
+            "type": "customNode",
+            "data": {
+                "id": "chatOpenAI_0",
+                "label": "ChatOpenAI",
+                "version": 1,
+                "name": "chatOpenAI",
+                "type": "ChatOpenAI",
+                "baseClasses": ["ChatOpenAI", "BaseChatModel", "BaseLanguageModel"],
+                "category": "Chat Models",
+                "description": "OpenAI Chat Model for conversational AI",
+                "inputParams": [
+                    {
+                        "label": "Connect Credential",
+                        "name": "credential",
+                        "type": "credential",
+                        "credentialNames": ["openAIApi"]
+                    },
+                    {
+                        "label": "Model Name",
+                        "name": "modelName",
+                        "type": "options",
+                        "options": [
+                            {"label": "gpt-3.5-turbo", "name": "gpt-3.5-turbo"},
+                            {"label": "gpt-4", "name": "gpt-4"},
+                            {"label": "gpt-4-turbo-preview", "name": "gpt-4-turbo-preview"}
+                        ],
+                        "default": "gpt-3.5-turbo"
+                    }
+                ],
+                "inputAnchors": [],
+                "inputs": {
+                    "modelName": "gpt-4"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "chatOpenAI_0-output-chatOpenAI-ChatOpenAI|BaseChatModel|BaseLanguageModel",
+                        "name": "chatOpenAI",
+                        "label": "ChatOpenAI",
+                        "type": "ChatOpenAI | BaseChatModel | BaseLanguageModel"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 200,
+                "y": 200
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 300,
+            "height": 514,
+            "id": "hubspot_0",
+            "position": {
+                "x": 1000,
+                "y": 200
+            },
+            "type": "customNode",
+            "data": {
+                "id": "hubspot_0",
+                "label": "HubSpot CRM",
+                "version": 1,
+                "name": "hubspot",
+                "type": "HubSpot",
+                "baseClasses": ["HubSpot", "Tool"],
+                "category": "Integrations",
+                "description": "Connect to HubSpot CRM for contact management, deal tracking, and lead management",
+                "inputParams": [
+                    {
+                        "label": "Connect Credential",
+                        "name": "credential",
+                        "type": "credential",
+                        "credentialNames": ["hubspotApi"]
+                    },
+                    {
+                        "label": "Operation",
+                        "name": "operation",
+                        "type": "options",
+                        "options": [
+                            {"label": "Contacts", "name": "contacts"},
+                            {"label": "Deals", "name": "deals"},
+                            {"label": "Companies", "name": "companies"}
+                        ]
+                    }
+                ],
+                "inputAnchors": [],
+                "inputs": {
+                    "operation": "contacts"
+                },
+                "outputAnchors": [
+                    {
+                        "id": "hubspot_0-output-hubspot-HubSpot",
+                        "name": "hubspot",
+                        "label": "HubSpot",
+                        "type": "HubSpot"
+                    }
+                ],
+                "outputs": {},
+                "selected": false
+            },
+            "positionAbsolute": {
+                "x": 1000,
+                "y": 200
+            },
+            "selected": false,
+            "dragging": false
+        }
+    ],
+    "edges": [
+        {
+            "source": "chatOpenAI_0",
+            "sourceHandle": "chatOpenAI_0-output-chatOpenAI-ChatOpenAI|BaseChatModel|BaseLanguageModel",
+            "target": "salesAgent_0",
+            "targetHandle": "salesAgent_0-input-model-BaseChatModel",
+            "type": "buttonedge",
+            "id": "chatOpenAI_0-salesAgent_0-connection",
+            "data": {
+                "label": ""
+            }
+        },
+        {
+            "source": "salesAgent_0",
+            "sourceHandle": "salesAgent_0-output-salesAgent-SalesAgent",
+            "target": "hubspot_0",
+            "targetHandle": "hubspot_0-input-hubspot-HubSpot",
+            "type": "buttonedge",
+            "id": "salesAgent_0-hubspot_0-connection",
+            "data": {
+                "label": ""
+            }
+        }
+    ]
+}
